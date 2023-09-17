@@ -1,0 +1,1 @@
+#### Sample Spring Boot application demonstrating java coding standards and elaborating on various conventions (versioning, structure, testing, etc.)

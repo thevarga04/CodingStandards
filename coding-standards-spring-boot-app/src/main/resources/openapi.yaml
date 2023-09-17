@@ -1,0 +1,113 @@
+openapi: "3.1.0"
+info:
+  version: "2.0"
+  title: Coding Standards and Conventions
+servers:
+  - url: http://localhost:9194/api/v2
+    description: Generated server url
+paths:
+  /seating/booking/{tableId}:
+    post:
+      summary: Create Seating Table Booking order
+      tags:
+        - seating-table-booking
+      operationId: seatingTableBooking
+      parameters:
+        - name: tableId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TableBooking'
+        required: true
+      responses:
+        "201":
+          description: Seating Table Booking Succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableBooking'
+  /seating/cleaning/{tableId}:
+    post:
+      summary: Create Seating Table Cleaning order
+      tags:
+        - seating-table-cleaning
+      operationId: seatingTableCleaning
+      parameters:
+        - name: tableId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TableCleaning'
+        required: true
+      responses:
+        "201":
+          description: Seating Table Cleaning Succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableCleaning'
+components:
+  schemas:
+    Restaurant:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+    Client:
+      type: object
+      required:
+        - name
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          minLength: 1
+    TableBooking:
+      type: object
+      required:
+        - name
+        - size
+        - from
+        - to
+        - client
+      properties:
+        name:
+          type: string
+          minLength: 1
+        size:
+          type: integer
+          minimum: 1
+        from:
+          type: integer
+          format: int64
+        to:
+          type: integer
+          format: int64
+        client:
+          $ref: '#/components/schemas/Client'
+        restaurant:
+          $ref: '#/components/schemas/Restaurant'
+    TableCleaning:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+        from:
+          type: integer
+          format: int64
+        restaurant:
+          $ref: '#/components/schemas/Restaurant'

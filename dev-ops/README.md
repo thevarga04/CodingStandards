@@ -1,0 +1,1 @@
+#### Directory 'dev-ops' or 'DevOps' may contain docker, kubernetes, terraform or other resources facilitating DevOps processes

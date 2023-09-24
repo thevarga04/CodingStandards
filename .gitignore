@@ -10,7 +10,7 @@ Testing/apache-jmeter-5.3/docs/
 Testing/apache-jmeter-5.3/printable_docs/
 Testing/apache-jmeter-5.3/
 Testing/reports/
-coding-standards-spring-boot-app/src/test/jmeter/reports
+**/src/test/jmeter/reports
 Testing/testdata/TestfaelleJmeterV2019_4_1_mit_SSAR-r.csv
 !Testing/apache-jmeter-5.3/bin/system.properties
 

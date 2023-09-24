@@ -8,3 +8,8 @@
    with FO project structure merging conflicts are minimal.
 * Versioning, Scalability or Feature migration - much better than Folder-By-Type\
    (which works well only on 1 feature or only 1 DomainObject per project).
+
+
+### External Resources 
+https://medium.com/elca-it/feature-based-modular-code-organization-in-java-e4b611d6c103
+

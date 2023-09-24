@@ -1,0 +1,90 @@
+openapi: "3.0.1"
+info:
+  version: "1.0"
+  title: Coding Standards and Conventions
+servers:
+  - url: http://localhost:9194/api/v1
+    description: Generated server url
+paths:
+  /seating/booking:
+    post:
+      summary: Book Table Seating
+      tags:
+        - book-table-seating
+      operationId: bookTableSeating
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TableBooking'
+        required: true
+      responses:
+        "201":
+          description: Table Booking Succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableBooking'
+  /seating/cleaning:
+    post:
+      summary: Request Table Cleaning
+      tags:
+        - request-table-cleaning
+      operationId: requestTableCleaning
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TableCleaning'
+        required: true
+      responses:
+        "201":
+          description: Table Cleaning Succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableCleaning'
+components:
+  schemas:
+    Client:
+      type: object
+      required:
+        - name
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          minLength: 1
+    TableBooking:
+      type: object
+      required:
+        - id
+        - size
+        - from
+        - to
+        - client
+      properties:
+        id:
+          type: string
+          minLength: 1
+        size:
+          type: integer
+          minimum: 1
+        from:
+          type: integer
+          format: int64
+        to:
+          type: integer
+          format: int64
+        client:
+          $ref: '#/components/schemas/Client'
+    TableCleaning:
+      type: object
+      properties:
+        id:
+          type: string
+          minLength: 1
+        from:
+          type: integer
+          format: int64

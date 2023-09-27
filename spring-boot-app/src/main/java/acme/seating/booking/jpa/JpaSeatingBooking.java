@@ -38,12 +38,12 @@ public class JpaSeatingBooking {
   @Min(1_000_000_000L)
   private long until;
 
-  @ManyToOne
-  @JoinColumn(name = "client_id")
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "client_id", insertable = false, updatable = false)
   private JpaClient client;
 
-  @ManyToOne
-  @JoinColumn(name = "seating_id")
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "seating_id", insertable = false, updatable = false)
   private JpaSeating seating;
 
 }

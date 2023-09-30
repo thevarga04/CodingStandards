@@ -1,0 +1,130 @@
+openapi: "3.0.1"
+info:
+  version: "2.0"
+  title: Coding Standards and Conventions
+servers:
+  - url: http://localhost:9194/api/v2
+    description: Generated server url
+paths:
+  /seating/booking:
+    post:
+      summary: Seating Booking in the Restaurant
+      tags:
+        - seating-booking
+      operationId: seatingBookingInRestaurant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SeatingBooking'
+        required: true
+      responses:
+        "201":
+          description: Seating Booking Succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SeatingBooking'
+  /seating/cleaning:
+    post:
+      summary: Seating Cleaning in the Restaurant
+      tags:
+        - seating-cleaning
+      operationId: seatingCleaningInRestaurant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SeatingCleaning'
+        required: true
+      responses:
+        "201":
+          description: Seating Cleaning Succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SeatingCleaning'
+components:
+  schemas:
+    Restaurant:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          minimum: 1
+        name:
+          type: string
+          minLength: 2
+    Seating:
+      type: object
+      required:
+        - id
+        - restaurant
+      properties:
+        id:
+          type: integer
+          minimum: 1
+        capacity:
+          type: integer
+          minimum: 1
+        restaurant:
+          $ref: '#/components/schemas/Restaurant'
+    Client:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          minLength: 3
+        email:
+          type: string
+          minLength: 7
+    SeatingBooking:
+      type: object
+      required:
+        - id
+        - quantity
+        - since
+        - until
+        - client
+        - seating
+      properties:
+        id:
+          type: integer
+        quantity:
+          type: integer
+          minimum: 1
+        since:
+          type: integer
+          format: int64
+          minimum: 10000000000
+          maximum: 9000000000000
+        until:
+          type: integer
+          format: int64
+          minimum: 10000000000
+          maximum: 9000000000000
+        client:
+          $ref: '#/components/schemas/Client'
+        seating:
+          $ref: '#/components/schemas/Seating'
+    SeatingCleaning:
+      type: object
+      required:
+        - since
+        - seating
+      properties:
+        id:
+          type: integer
+        since:
+          type: integer
+          format: int64
+          minimum: 10000000000
+          maximum: 9000000000000
+        seating:
+          $ref: '#/components/schemas/Seating'

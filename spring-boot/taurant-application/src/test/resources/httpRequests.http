@@ -1,0 +1,31 @@
+### Create a Restaurant
+POST http://localhost:9194/api/v2/realm/restaurants
+
+### Create a Seating
+POST http://localhost:9194/api/v2/realm/seatings
+
+### Get All Seatings
+GET http://localhost:9194/api/v2/realm/seatings
+
+### Create a Client
+POST http://localhost:9194/api/v2/realm/clients
+
+###
+POST http://localhost:9194/api/v2/seating/booking
+Content-Type: application/json
+
+{
+  "id": 0,
+  "quantity": 2,
+  "since": 90000000000,
+  "until": 90000720000,
+  "client": {
+    "id": 1
+  },
+  "seating": {
+    "id": 1,
+    "restaurant": {
+      "id": 1
+    }
+  }
+}

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.1.3</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+
+  <groupId>acme.taurant</groupId>
+  <artifactId>taurant-api</artifactId>
+  <version>3.0-SNAPSHOT</version>
+  <name>${project.artifactId}</name>
+  <description>Taurant OpenApi Specification</description>
+
+  <properties>
+    <java.version>17</java.version>
+
+    <jakarta.validation.version>3.0.2</jakarta.validation.version>
+    <com.fasterxml.jackson.core.version>2.15.2</com.fasterxml.jackson.core.version>
+  </properties>
+
+  <!-- Artifacts specified in the <dependencies> section will ALWAYS be included as a dependency of the child module(s).	-->
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-jersey</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>io.swagger.core.v3</groupId>
+      <artifactId>swagger-annotations</artifactId>
+      <version>2.2.15</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.swagger.parser.v3</groupId>
+      <artifactId>swagger-parser</artifactId>
+      <version>2.1.16</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.squareup.okhttp3</groupId>
+      <artifactId>okhttp</artifactId>
+      <version>4.11.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.openapitools</groupId>
+      <artifactId>jackson-databind-nullable</artifactId>
+      <version>0.2.6</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>${com.fasterxml.jackson.core.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${com.fasterxml.jackson.core.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
+      <version>${com.fasterxml.jackson.core.version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api -->
+    <dependency>
+      <groupId>jakarta.validation</groupId>
+      <artifactId>jakarta.validation-api</artifactId>
+      <version>${jakarta.validation.version}</version>
+    </dependency>
+
+  </dependencies>
+
+  <!-- Artifacts specified in the <dependencyManagement> section, will only be included in the child module -->
+  <!-- if they were also specified in the <dependencies> section of the child module itself.	-->
+  <dependencyManagement>
+  </dependencyManagement>
+
+
+  <build>
+    <plugins>
+
+<!--      <plugin>-->
+<!--        <groupId>org.springframework.boot</groupId>-->
+<!--        <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--        <configuration>-->
+<!--          <excludes>-->
+<!--            <exclude>-->
+<!--              <groupId>org.projectlombok</groupId>-->
+<!--              <artifactId>lombok</artifactId>-->
+<!--            </exclude>-->
+<!--          </excludes>-->
+<!--        </configuration>-->
+<!--      </plugin>-->
+
+      <plugin>
+        <groupId>org.openapitools</groupId>
+        <artifactId>openapi-generator-maven-plugin</artifactId>
+        <version>6.6.0</version>
+        <executions>
+          <execution>
+            <id>generate-spring-stubs-v1</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <modelPackage>acme.taurant.openapi.v1.model</modelPackage>
+              <apiPackage>acme.taurant.openapi.v1.spring</apiPackage>
+              <inputSpec>${project.basedir}/src/main/resources/v1/openapi.yaml</inputSpec>
+              <generatorName>spring</generatorName>
+              <ignoreFileOverride>.openapi-generator-ignore</ignoreFileOverride>
+              <configOptions>
+                <useTags>true</useTags>
+                <interfaceOnly>true</interfaceOnly>
+                <useSpringBoot3>true</useSpringBoot3>
+                <useJakartaEe>true</useJakartaEe>
+                <delegatePattern>true</delegatePattern>
+                <performBeanValidation>true</performBeanValidation>
+                <useBeanValidation>true</useBeanValidation>
+              </configOptions>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-spring-stubs-v2</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <modelPackage>acme.taurant.openapi.v2.model</modelPackage>
+              <apiPackage>acme.taurant.openapi.v2.spring</apiPackage>
+              <inputSpec>${project.basedir}/src/main/resources/v2/openapi.yaml</inputSpec>
+              <generatorName>spring</generatorName>
+              <ignoreFileOverride>.openapi-generator-ignore</ignoreFileOverride>
+              <configOptions>
+                <useSpringBoot3>true</useSpringBoot3>
+                <useJakartaEe>true</useJakartaEe>
+                <delegatePattern>true</delegatePattern>
+                <performBeanValidation>true</performBeanValidation>
+                <useBeanValidation>true</useBeanValidation>
+              </configOptions>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

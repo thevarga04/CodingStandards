@@ -1,0 +1,61 @@
+package acme.taurant.realm;
+
+import static acme.taurant.realm.RealmFactory.createJpaClient;
+import static acme.taurant.realm.RealmFactory.createJpaRestaurant;
+import static acme.taurant.realm.RealmFactory.createJpaSeating;
+import static acme.taurant.realm.RealmMapper.toBo;
+
+import acme.taurant.openapi.v2.model.Client;
+import acme.taurant.openapi.v2.model.Restaurant;
+import acme.taurant.openapi.v2.model.Seating;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Profile;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/v2/realm")
+@RequiredArgsConstructor
+@Profile(value = "Sponsor")
+@Transactional
+public class RealmRest {
+
+  private final RestaurantRepo restaurantRepo;
+  private final SeatingRepo seatingRepo;
+  private final ClientRepo clientRepo;
+
+
+  @PostMapping("/restaurants")
+  public ResponseEntity<Restaurant> createRestaurant() {
+    final var jpaRestaurant = createJpaRestaurant();
+    final var saved = restaurantRepo.save(jpaRestaurant);
+    return ResponseEntity.ok(toBo(saved));
+  }
+
+  @PostMapping("/seatings")
+  public ResponseEntity<Seating> createSeating() {
+    final var jpaSeating = createJpaSeating();
+    final var saved = seatingRepo.save(jpaSeating);
+    return ResponseEntity.ok(toBo(saved));
+  }
+
+  @GetMapping("/seatings")
+  public ResponseEntity<List<Seating>> getSeatings() {
+    final var jpaSeatingList = seatingRepo.findAll();
+    final var seatings = toBo(jpaSeatingList);
+    return ResponseEntity.ok(seatings);
+  }
+
+  @PostMapping("/clients")
+  public ResponseEntity<Client> createClient() {
+    final var jpaClient = createJpaClient();
+    final var jpa = clientRepo.save(jpaClient);
+    return ResponseEntity.ok(toBo(jpa));
+  }
+
+}

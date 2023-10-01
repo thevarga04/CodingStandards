@@ -30,6 +30,8 @@
 * https://www.codementor.io/learn-development/what-makes-good-software-architecture-101
 #### EIP
   * https://www.enterpriseintegrationpatterns.com/patterns/messaging/toc.html
+#### Microservices Patterns
+  * https://microservices.io/patterns/index.html
 
 
 ## Clean Functional Specification

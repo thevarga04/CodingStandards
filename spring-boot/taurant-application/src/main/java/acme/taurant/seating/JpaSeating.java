@@ -1,6 +1,6 @@
 package acme.taurant.seating;
 
-import acme.taurant.realm.JpaRestaurant;
+import acme.taurant.sponsor.JpaRestaurant;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

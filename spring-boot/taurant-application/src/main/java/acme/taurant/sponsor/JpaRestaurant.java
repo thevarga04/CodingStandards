@@ -1,4 +1,4 @@
-package acme.taurant.realm;
+package acme.taurant.sponsor;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

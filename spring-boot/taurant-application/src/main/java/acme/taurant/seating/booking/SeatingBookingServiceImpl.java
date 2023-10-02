@@ -6,6 +6,7 @@ import static org.springframework.beans.BeanUtils.copyProperties;
 import acme.taurant.analytics.AnalyticsDispatcher;
 import acme.taurant.openapi.v2.model.SeatingBooking;
 import acme.taurant.seating.booking.jpa.JpaSeatingBooking;
+import acme.taurant.seating.booking.jpa.SeatingBookingDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +22,7 @@ public class SeatingBookingServiceImpl implements SeatingBookingService {
 
   @Override
   public SeatingBooking seatingBookingInRestaurant(SeatingBooking seatingBooking) {
-    seatingBookingDao.assertNotPreoccupied(seatingBooking);
+    seatingBookingDao.assertNotOverlap(seatingBooking);
     final var jpaSeatingBooking = toJpa(seatingBooking);
     final var saved = seatingBookingDao.save(jpaSeatingBooking);
     analyticsDispatcher.dispatch(seatingBooking);

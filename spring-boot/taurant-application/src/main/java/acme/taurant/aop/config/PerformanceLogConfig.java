@@ -1,4 +1,4 @@
-package acme.taurant.realm.config.aop;
+package acme.taurant.aop.config;
 
 import acme.taurant.aop.PerformanceLog;
 import org.springframework.context.annotation.Bean;

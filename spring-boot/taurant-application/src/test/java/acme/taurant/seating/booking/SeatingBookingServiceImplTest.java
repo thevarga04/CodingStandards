@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 
 import acme.taurant.analytics.AnalyticsDispatcherService;
 import acme.taurant.seating.booking.jpa.JpaSeatingBooking;
+import acme.taurant.seating.booking.jpa.SeatingBookingDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,16 +1,16 @@
-package acme.taurant.realm.config;
+package acme.taurant.seating.cleaning.exception;
 
-import acme.taurant.seating.booking.SeatingBookingPreoccupiedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class GlobalControllerExceptionHandler {
+public class SeatingCleaningExceptionHandler {
 
-  @ExceptionHandler(SeatingBookingPreoccupiedException.class)
-  public ResponseEntity<String> userValidatorException(SeatingBookingPreoccupiedException e) {
+
+  @ExceptionHandler(SeatingCleaningException.class)
+  public ResponseEntity<String> seatingCleaningException(SeatingCleaningException e) {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getClass().getSimpleName());
   }
 

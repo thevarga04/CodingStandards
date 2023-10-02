@@ -1,4 +1,4 @@
-package acme.taurant.realm;
+package acme.taurant.sponsor;
 
 import acme.taurant.seating.JpaSeating;
 import org.springframework.data.jpa.repository.JpaRepository;

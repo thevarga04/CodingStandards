@@ -1,4 +1,4 @@
-package acme.taurant.realm.config.async;
+package acme.taurant.config.async;
 
 import java.time.Duration;
 import org.springframework.context.annotation.Bean;

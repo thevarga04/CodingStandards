@@ -1,9 +1,9 @@
-package acme.taurant.realm;
+package acme.taurant.sponsor;
 
-import static acme.taurant.realm.RealmFactory.createJpaClient;
-import static acme.taurant.realm.RealmFactory.createJpaRestaurant;
-import static acme.taurant.realm.RealmFactory.createJpaSeating;
-import static acme.taurant.realm.RealmMapper.toBo;
+import static acme.taurant.sponsor.RealmFactory.createJpaClient;
+import static acme.taurant.sponsor.RealmFactory.createJpaRestaurant;
+import static acme.taurant.sponsor.RealmFactory.createJpaSeating;
+import static acme.taurant.sponsor.RealmMapper.toBo;
 
 import acme.taurant.openapi.v2.model.Client;
 import acme.taurant.openapi.v2.model.Restaurant;

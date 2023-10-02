@@ -1,7 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="TaurantApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
     <option name="ACTIVE_PROFILES" value="default, Sponsor, PerformanceLogging" />
-    <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
     <module name="taurant-application" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="acme.taurant.TaurantApplication" />
     <method v="2">

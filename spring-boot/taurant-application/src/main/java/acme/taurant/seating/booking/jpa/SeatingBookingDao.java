@@ -1,10 +1,9 @@
-package acme.taurant.seating.booking;
+package acme.taurant.seating.booking.jpa;
 
-import static acme.taurant.seating.booking.SeatingBookingValidator.assertEmpty;
+import static org.springframework.util.CollectionUtils.isEmpty;
 
 import acme.taurant.openapi.v2.model.SeatingBooking;
-import acme.taurant.seating.booking.jpa.JpaSeatingBooking;
-import acme.taurant.seating.booking.jpa.SeatingBookingRepo;
+import acme.taurant.seating.booking.exception.SeatingBookingOverlappingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,13 +16,16 @@ public class SeatingBookingDao<T extends JpaSeatingBooking> {
   private final SeatingBookingRepo seatingBookingRepo;
 
 
-  public void assertNotPreoccupied(SeatingBooking seatingBooking) {
-    final var jpaSeatingBookingList = seatingBookingRepo.findBySinceAfterAndUntilBeforeAndSeating_Id(
+  public void assertNotOverlap(SeatingBooking seatingBooking) {
+    final var jpaSeatingBookingList = seatingBookingRepo.getOverlaps(
       seatingBooking.getSince()
       , seatingBooking.getUntil()
       , seatingBooking.getSeating().getId()
     );
-    assertEmpty(jpaSeatingBookingList);
+
+    if (!isEmpty(jpaSeatingBookingList)) {
+      throw new SeatingBookingOverlappingException();
+    }
   }
 
 

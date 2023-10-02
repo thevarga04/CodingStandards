@@ -1,3 +1,5 @@
+# http://localhost:9194/api/v2/swagger-ui.html
+
 ### Create a Restaurant
 POST http://localhost:9194/api/v2/realm/restaurants
 

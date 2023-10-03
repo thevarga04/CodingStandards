@@ -1,35 +1,33 @@
 package acme.taurant.config.async;
 
-import java.time.Duration;
+import static java.lang.Runtime.getRuntime;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-@EnableAsync
 @Configuration
+@EnableAsync
+@RequiredArgsConstructor
 public class AsyncConfig {
 
-  private static final int PROCESSORS = Math.max(1, Runtime.getRuntime().availableProcessors() - 1);
-  private static final int CORE_POOL_SIZE = PROCESSORS;
-  private static final int QUEUE_CAPACITY = PROCESSORS;
-  private static final int MAX_POOL_SIZE = 1_000;
-  private static final int KEEP_ALIVE_SECONDS = (int) Duration.ofMinutes(15).toSeconds();
-  private static final boolean ALLOW_CORE_THREAD_TIME_OUT = true;
+  private final ThreadPoolSettings threadPoolSettings;
 
 
   @Bean
-  @HPPooledExecutor
-  public ThreadPoolTaskExecutor highPerformancePooledExecutor() {
-    final var threadNamePrefix = "PooledExecutor-";
+  @PooledExecutor
+  public ThreadPoolTaskExecutor threadPoolTaskExecutor() {
+    var processors = Math.max(1, getRuntime().availableProcessors() - 1);
 
     final var executor = new ThreadPoolTaskExecutor();
-    executor.setCorePoolSize(CORE_POOL_SIZE);
-    executor.setQueueCapacity(QUEUE_CAPACITY);
-    executor.setMaxPoolSize(MAX_POOL_SIZE);
-    executor.setKeepAliveSeconds(KEEP_ALIVE_SECONDS);
-    executor.setAllowCoreThreadTimeOut(ALLOW_CORE_THREAD_TIME_OUT);
-    executor.setThreadNamePrefix(threadNamePrefix);
+    executor.setCorePoolSize(processors);
+    executor.setQueueCapacity(processors);
+    executor.setMaxPoolSize(threadPoolSettings.getMaxPoolSize());
+    executor.setKeepAliveSeconds(threadPoolSettings.getKeepAliveSeconds());
+    executor.setAllowCoreThreadTimeOut(threadPoolSettings.isAllowCoreThreadTimeOut());
+    executor.setThreadNamePrefix(threadPoolSettings.getThreadNamePrefix());
     executor.afterPropertiesSet();
     return executor;
   }

@@ -11,7 +11,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
 @ActiveProfiles("Sponsor")
-class SeatingRestE2ETest extends AbstractTest {
+class SeatingBookingE2ETest extends AbstractTest {
 
 
   void create2Restaurants() throws Exception {

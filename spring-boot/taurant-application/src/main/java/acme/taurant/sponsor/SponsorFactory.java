@@ -4,12 +4,12 @@ import acme.taurant.client.JpaClient;
 import acme.taurant.seating.JpaSeating;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class RealmFactory {
+public class SponsorFactory {
 
   private static final AtomicInteger COUNTER = new AtomicInteger(1);
 
 
-  private RealmFactory() {
+  private SponsorFactory() {
   }
 
 

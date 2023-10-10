@@ -11,10 +11,10 @@
   </parent>
 
   <groupId>acme.taurant</groupId>
-  <artifactId>taurant-application</artifactId>
+  <artifactId>taurant-it</artifactId>
   <version>3.0-SNAPSHOT</version>
   <name>${project.artifactId}</name>
-  <description>Taurant Application</description>
+  <description>Taurant Integration Tests</description>
 
   <properties>
     <java.version>17</java.version>
@@ -34,6 +34,12 @@
     <dependency>
       <groupId>acme.taurant</groupId>
       <artifactId>taurant-api</artifactId>
+      <version>3.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>acme.taurant</groupId>
+      <artifactId>taurant-application</artifactId>
       <version>3.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>

@@ -1,5 +1,7 @@
 package acme.taurant.seating;
 
+import static org.springframework.http.HttpStatus.CREATED;
+
 import acme.taurant.openapi.v2.model.SeatingBooking;
 import acme.taurant.openapi.v2.model.SeatingCleaning;
 import acme.taurant.openapi.v2.spring.SeatingApiDelegate;
@@ -19,12 +21,12 @@ public class SeatingRest implements SeatingApiDelegate {
 
   @Override
   public ResponseEntity<SeatingBooking> seatingBookingInRestaurant(SeatingBooking seatingBooking) {
-    return ResponseEntity.ok(seatingBookingService.seatingBookingInRestaurant(seatingBooking));
+    return ResponseEntity.status(CREATED).body(seatingBookingService.seatingBookingInRestaurant(seatingBooking));
   }
 
   @Override
   public ResponseEntity<SeatingCleaning> seatingCleaningInRestaurant(SeatingCleaning seatingCleaning) {
-    return ResponseEntity.ok(seatingCleaningService.seatingCleaningInRestaurant(seatingCleaning));
+    return ResponseEntity.status(CREATED).body(seatingCleaningService.seatingCleaningInRestaurant(seatingCleaning));
   }
 
 }

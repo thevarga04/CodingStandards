@@ -1,4 +1,4 @@
-package acme.taurant.realm;
+package acme.taurant.sponsor;
 
 import static acme.taurant.seating.booking.SeatingBookingMapper.toJpa;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -7,15 +7,9 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.when;
 
-import acme.taurant.common.SeatingFactory;
+import acme.taurant.common.ObjectFactory;
 import acme.taurant.openapi.v2.model.Restaurant;
 import acme.taurant.openapi.v2.model.Seating;
-import acme.taurant.sponsor.ClientRepo;
-import acme.taurant.sponsor.JpaRestaurant;
-import acme.taurant.sponsor.RealmFactory;
-import acme.taurant.sponsor.RealmRest;
-import acme.taurant.sponsor.RestaurantRepo;
-import acme.taurant.sponsor.SeatingRepo;
 import org.hibernate.QueryParameterException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,7 +22,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 
 @ExtendWith(MockitoExtension.class)
-class RealmRestTest {
+class SponsorRestTest {
 
   @Mock
   RestaurantRepo restaurantRepo;
@@ -40,20 +34,20 @@ class RealmRestTest {
   ClientRepo clientRepo;
 
   @InjectMocks
-  RealmRest sut;
+  SponsorRest sut;
 
-  static MockedStatic<RealmFactory> realmFactory;
+  static MockedStatic<SponsorFactory> realmFactory;
 
 
   @BeforeAll
   static void staticSetUp() {
-    realmFactory = mockStatic(RealmFactory.class);
+    realmFactory = mockStatic(SponsorFactory.class);
   }
 
 
   @BeforeEach
   void setUp() {
-    sut = new RealmRest(restaurantRepo, seatingRepo, clientRepo);
+    sut = new SponsorRest(restaurantRepo, seatingRepo, clientRepo);
   }
 
 
@@ -63,7 +57,7 @@ class RealmRestTest {
     var given = new JpaRestaurant();
 
     // When
-    realmFactory.when(RealmFactory::createJpaRestaurant).thenReturn(given);
+    realmFactory.when(SponsorFactory::createJpaRestaurant).thenReturn(given);
     when(restaurantRepo.save(any())).thenReturn(given);
     var actual = sut.createRestaurant();
 
@@ -105,10 +99,12 @@ class RealmRestTest {
   @Test
   void createSeating_When_MockEverything_And_Using_ProductionCode_AntiPatterns() {
     // Given
-    var given = toJpa(SeatingFactory.createSeating());
+    var restaurant = ObjectFactory.createRestaurant();
+    var given = toJpa(ObjectFactory.createSeating());
+    given.setRestaurant(toJpa(restaurant));
 
     // When
-    realmFactory.when(RealmFactory::createJpaSeating).thenReturn(given);
+    realmFactory.when(SponsorFactory::createJpaSeating).thenReturn(given);
     when(seatingRepo.save(any())).thenReturn(given);
     var actual = sut.createSeating();
 

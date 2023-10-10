@@ -8,9 +8,9 @@ import acme.taurant.seating.JpaSeating;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RealmMapper {
+public class SponsorMapper {
 
-  private RealmMapper() {
+  private SponsorMapper() {
   }
 
 

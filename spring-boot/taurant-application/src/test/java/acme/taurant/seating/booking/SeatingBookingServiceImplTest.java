@@ -1,6 +1,6 @@
 package acme.taurant.seating.booking;
 
-import static acme.taurant.common.SeatingFactory.createSeatingBooking;
+import static acme.taurant.common.ObjectFactory.createSeatingBooking;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;

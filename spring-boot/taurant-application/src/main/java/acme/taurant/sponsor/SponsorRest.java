@@ -1,9 +1,9 @@
 package acme.taurant.sponsor;
 
-import static acme.taurant.sponsor.RealmFactory.createJpaClient;
-import static acme.taurant.sponsor.RealmFactory.createJpaRestaurant;
-import static acme.taurant.sponsor.RealmFactory.createJpaSeating;
-import static acme.taurant.sponsor.RealmMapper.toBo;
+import static acme.taurant.sponsor.SponsorFactory.createJpaClient;
+import static acme.taurant.sponsor.SponsorFactory.createJpaRestaurant;
+import static acme.taurant.sponsor.SponsorFactory.createJpaSeating;
+import static acme.taurant.sponsor.SponsorMapper.toBo;
 
 import acme.taurant.openapi.v2.model.Client;
 import acme.taurant.openapi.v2.model.Restaurant;
@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v2/realm")
 @RequiredArgsConstructor
-@Profile(value = "Sponsor")
+@Profile("Sponsor")
 @Transactional
-public class RealmRest {
+public class SponsorRest {
 
   private final RestaurantRepo restaurantRepo;
   private final SeatingRepo seatingRepo;

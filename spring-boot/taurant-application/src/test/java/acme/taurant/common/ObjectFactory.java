@@ -5,9 +5,9 @@ import acme.taurant.openapi.v2.model.Restaurant;
 import acme.taurant.openapi.v2.model.Seating;
 import acme.taurant.openapi.v2.model.SeatingBooking;
 
-public class SeatingFactory {
+public class ObjectFactory {
 
-  private SeatingFactory() {
+  private ObjectFactory() {
   }
 
 

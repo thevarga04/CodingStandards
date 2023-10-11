@@ -4,6 +4,7 @@ import static acme.taurant.sponsor.SponsorFactory.createJpaClient;
 import static acme.taurant.sponsor.SponsorFactory.createJpaRestaurant;
 import static acme.taurant.sponsor.SponsorFactory.createJpaSeating;
 import static acme.taurant.sponsor.SponsorMapper.toBo;
+import static org.springframework.http.HttpStatus.CREATED;
 
 import acme.taurant.openapi.v2.model.Client;
 import acme.taurant.openapi.v2.model.Restaurant;
@@ -34,28 +35,28 @@ public class SponsorRest {
   public ResponseEntity<Restaurant> createRestaurant() {
     final var jpaRestaurant = createJpaRestaurant();
     final var saved = restaurantRepo.save(jpaRestaurant);
-    return ResponseEntity.ok(toBo(saved));
+    return ResponseEntity.status(CREATED).body(toBo(saved));
   }
 
   @PostMapping("/seatings")
   public ResponseEntity<Seating> createSeating() {
     final var jpaSeating = createJpaSeating();
     final var saved = seatingRepo.save(jpaSeating);
-    return ResponseEntity.ok(toBo(saved));
+    return ResponseEntity.status(CREATED).body(toBo(saved));
   }
 
   @GetMapping("/seatings")
   public ResponseEntity<List<Seating>> getSeatings() {
     final var jpaSeatingList = seatingRepo.findAll();
-    final var seatings = toBo(jpaSeatingList);
-    return ResponseEntity.ok(seatings);
+    final var seatingList = toBo(jpaSeatingList);
+    return ResponseEntity.status(CREATED).body(seatingList);
   }
 
   @PostMapping("/clients")
   public ResponseEntity<Client> createClient() {
     final var jpaClient = createJpaClient();
-    final var jpa = clientRepo.save(jpaClient);
-    return ResponseEntity.ok(toBo(jpa));
+    final var saved = clientRepo.save(jpaClient);
+    return ResponseEntity.status(CREATED).body(toBo(saved));
   }
 
 }

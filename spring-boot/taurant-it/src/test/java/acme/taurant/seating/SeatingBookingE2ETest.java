@@ -1,10 +1,10 @@
 package acme.taurant.seating;
 
+import static acme.taurant.common.ObjectFactory.createSeatingBooking;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import acme.taurant.common.AbstractTest;
-import acme.taurant.common.ObjectFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -14,33 +14,31 @@ import org.springframework.test.context.ActiveProfiles;
 class SeatingBookingE2ETest extends AbstractTest {
 
 
-  void create2Restaurants() throws Exception {
-    // When
-    POST("/api/v2/realm/restaurants")
-      .andExpect(status().isOk());
-
-    POST("/api/v2/realm/restaurants")
-      .andExpect(status().isOk());
+  void createRestaurants(int amount) throws Exception {
+    while (amount-- > 0) {
+      POST("/api/v2/realm/restaurants")
+        .andExpect(status().isCreated());
+    }
   }
 
   void createClient() throws Exception {
     POST("/api/v2/realm/clients")
-      .andExpect(status().isOk());
+      .andExpect(status().isCreated());
   }
 
   void createSeating() throws Exception {
     POST("/api/v2/realm/seatings")
-      .andExpect(status().isOk());
+      .andExpect(status().isCreated());
   }
 
 
   @Test
   void createSeatingBookingIn2ndRestaurant() throws Exception {
     // Given
-    create2Restaurants();
+    createRestaurants(2);
     createClient();
     createSeating();
-    var given = ObjectFactory.createSeatingBooking();
+    var given = createSeatingBooking(0);
 
     // When
     POST("/api/v2/seating/booking", given)

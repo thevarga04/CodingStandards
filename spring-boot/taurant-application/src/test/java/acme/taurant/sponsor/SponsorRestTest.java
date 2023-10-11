@@ -1,13 +1,15 @@
 package acme.taurant.sponsor;
 
+import static acme.taurant.common.ObjectFactory.createRestaurant;
+import static acme.taurant.common.ObjectFactory.createSeating;
 import static acme.taurant.seating.booking.SeatingBookingMapper.toJpa;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.when;
+import static org.springframework.http.HttpStatus.CREATED;
 
-import acme.taurant.common.ObjectFactory;
 import acme.taurant.openapi.v2.model.Restaurant;
 import acme.taurant.openapi.v2.model.Seating;
 import org.hibernate.QueryParameterException;
@@ -19,7 +21,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
 
 @ExtendWith(MockitoExtension.class)
 class SponsorRestTest {
@@ -63,13 +64,13 @@ class SponsorRestTest {
 
     // Then
     assertThat(actual).isNotNull();
-    assertThat(actual.getStatusCode()).isEqualTo(HttpStatus.OK);
+    assertThat(actual.getStatusCode()).isEqualTo(CREATED);
     assertThat(actual.getBody()).isNotNull()
       .isExactlyInstanceOf(Restaurant.class);
   }
 
   @Test
-  void createRestaurant() {
+  void createRestaurantTest() {
     // Given
     var given = new JpaRestaurant();
 
@@ -79,13 +80,13 @@ class SponsorRestTest {
 
     // Then
     assertThat(actual).isNotNull();
-    assertThat(actual.getStatusCode()).isEqualTo(HttpStatus.OK);
+    assertThat(actual.getStatusCode()).isEqualTo(CREATED);
     assertThat(actual.getBody()).isNotNull()
       .isExactlyInstanceOf(Restaurant.class);
   }
 
   @Test
-  void createRestaurant_When_RuntimeException() {
+  void createRestaurant_When_RepoThrowsException() {
     // When
     when(restaurantRepo.save(any())).thenThrow(new QueryParameterException("Lorem Ipsum"));
 
@@ -99,8 +100,8 @@ class SponsorRestTest {
   @Test
   void createSeating_When_MockEverything_And_Using_ProductionCode_AntiPatterns() {
     // Given
-    var restaurant = ObjectFactory.createRestaurant();
-    var given = toJpa(ObjectFactory.createSeating());
+    var restaurant = createRestaurant();
+    var given = toJpa(createSeating());
     given.setRestaurant(toJpa(restaurant));
 
     // When
@@ -110,7 +111,7 @@ class SponsorRestTest {
 
     // Then
     assertThat(actual).isNotNull();
-    assertThat(actual.getStatusCode()).isEqualTo(HttpStatus.OK);
+    assertThat(actual.getStatusCode()).isEqualTo(CREATED);
     assertThat(actual.getBody()).isNotNull()
       .isExactlyInstanceOf(Seating.class);
   }

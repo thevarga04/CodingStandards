@@ -11,9 +11,9 @@ public class ObjectFactory {
   }
 
 
-  public static SeatingBooking createSeatingBooking() {
+  public static SeatingBooking createSeatingBooking(int id) {
     return new SeatingBooking(
-      0
+      id
       , 2
       , 90000000000L
       , 90000720000L

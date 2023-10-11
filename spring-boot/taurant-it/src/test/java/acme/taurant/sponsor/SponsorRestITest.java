@@ -1,6 +1,7 @@
 package acme.taurant.sponsor;
 
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import acme.taurant.common.AbstractTest;
@@ -34,7 +35,11 @@ class SponsorRestITest extends AbstractTest {
     // When
     when(seatingRepo.findAll()).thenReturn(givenList);
     GET("/api/v2/realm/seatings")
-      .andExpect(status().isOk());
+      .andExpect(status().isCreated())
+      .andExpect(jsonPath("$.length()").value(1))
+      .andExpect(jsonPath("$[0].id").value(1))
+      .andExpect(jsonPath("$[0].restaurant.id").value(1))
+    ;
   }
 
 

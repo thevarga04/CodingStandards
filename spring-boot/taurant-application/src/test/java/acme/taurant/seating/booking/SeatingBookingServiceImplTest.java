@@ -37,7 +37,7 @@ class SeatingBookingServiceImplTest {
   @Test
   void seatingBookingInRestaurant() {
     // Given
-    var given = createSeatingBooking();
+    var given = createSeatingBooking(0);
 
     // When
     when(seatingBookingDao.save(any())).thenReturn(new JpaSeatingBooking());

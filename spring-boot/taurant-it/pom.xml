@@ -43,6 +43,13 @@
       <version>3.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
+    <dependency>
+      <groupId>acme.taurant</groupId>
+      <artifactId>taurant-application</artifactId>
+      <version>3.0-SNAPSHOT</version>
+      <type>test-jar</type>
+      <scope>test</scope>
+    </dependency>
 
     <!-- PRODUCTION CODE -->
     <dependency>

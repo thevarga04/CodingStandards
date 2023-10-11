@@ -1,4 +1,4 @@
-# Folder By Type : Feature-Oriented Project Structure
+# Folder-By-Feature : Feature-Oriented Project Structure
 
 ## Advocacy for feature-oriented project structure
 * Good project design supports smooth parallel working of multiple developers,\

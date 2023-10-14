@@ -2,18 +2,23 @@
 
 ### Create a Restaurant
 POST http://localhost:9194/api/v2/realm/restaurants
+Authorization: Basic user pwd
 
 ### Create a Seating
 POST http://localhost:9194/api/v2/realm/seatings
+Authorization: Basic user pwd
 
 ### Get All Seatings
 GET http://localhost:9194/api/v2/realm/seatings
+Authorization: Basic user pwd
 
 ### Create a Client
 POST http://localhost:9194/api/v2/realm/clients
+Authorization: Basic user pwd
 
 ###
 POST http://localhost:9194/api/v2/seating/booking
+Authorization: Basic user pwd
 Content-Type: application/json
 
 {

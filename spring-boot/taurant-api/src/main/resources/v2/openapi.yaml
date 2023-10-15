@@ -44,7 +44,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SeatingCleaning'
+security:
+  - basicAuth: []
 components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
   schemas:
     Restaurant:
       type: object

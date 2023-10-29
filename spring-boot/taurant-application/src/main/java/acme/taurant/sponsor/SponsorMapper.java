@@ -1,11 +1,12 @@
 package acme.taurant.sponsor;
 
+import static acme.taurant.common.Collections.ofNullable;
+
 import acme.taurant.client.JpaClient;
 import acme.taurant.openapi.v2.model.Client;
 import acme.taurant.openapi.v2.model.Restaurant;
 import acme.taurant.openapi.v2.model.Seating;
 import acme.taurant.seating.JpaSeating;
-import java.util.ArrayList;
 import java.util.List;
 
 public class SponsorMapper {
@@ -19,26 +20,20 @@ public class SponsorMapper {
   }
 
   public static List<Seating> toBo(List<JpaSeating> jpaList) {
-    final var seatingList = new ArrayList<Seating>();
-    for (final var jpa : jpaList) {
-      final var seating = new Seating(jpa.getId(), toBo(jpa.getRestaurant()));
-      seating.setCapacity(jpa.getCapacity());
-      seatingList.add(seating);
-    }
-    return seatingList;
+    return ofNullable(jpaList)
+      .map(jpa -> new Seating(jpa.getId(), toBo(jpa.getRestaurant())).capacity(jpa.getCapacity()))
+      .toList();
   }
 
   public static Seating toBo(JpaSeating jpa) {
-    final var seating = new Seating(jpa.getId(), toBo(jpa.getRestaurant()));
-    seating.setCapacity(jpa.getCapacity());
-    return seating;
+    return new Seating(jpa.getId(), toBo(jpa.getRestaurant()))
+      .capacity(jpa.getCapacity());
   }
 
   public static Client toBo(JpaClient jpa) {
-    final var client = new Client(jpa.getId());
-    client.setName(jpa.getName());
-    client.setEmail(jpa.getEmail());
-    return client;
+    return new Client(jpa.getId())
+      .name(jpa.getName())
+      .email(jpa.getEmail());
   }
 
 

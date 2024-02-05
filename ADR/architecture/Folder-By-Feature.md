@@ -7,7 +7,7 @@
 * Assuming that developers are working on various features (in parallel),\
    with FO project structure merging conflicts are minimal.
 * Versioning, Scalability or Feature migration - much better than Folder-By-Type\
-   (which works well only on 1 feature or only 1 DomainObject per project).
+   (which works well only on one feature or only one DomainObject per project).
 
 
 ### External Resources 

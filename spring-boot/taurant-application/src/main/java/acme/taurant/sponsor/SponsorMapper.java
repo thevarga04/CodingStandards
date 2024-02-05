@@ -1,6 +1,6 @@
 package acme.taurant.sponsor;
 
-import static acme.taurant.common.Collections.ofNullable;
+import static acme.taurant.common.TaurantCollections.ofNullable;
 
 import acme.taurant.client.JpaClient;
 import acme.taurant.openapi.v2.model.Client;

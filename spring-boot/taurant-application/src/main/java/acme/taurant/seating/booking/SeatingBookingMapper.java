@@ -17,7 +17,7 @@ import acme.taurant.sponsor.JpaRestaurant;
  * Spring's Converter interface or BeanUtils.copyProperties.
  * <a href="https://docs.spring.io/spring-framework/reference/core/validation/convert.html">Spring Type Conversion</a>
  * <p>
- * Based on that we choose the corresponding naming strategy "mapper" or "converter".
+ * Based on that, we choose the corresponding naming strategy "mapper" or "converter".
  */
 public class SeatingBookingMapper {
 

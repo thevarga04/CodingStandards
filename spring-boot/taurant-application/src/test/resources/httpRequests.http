@@ -36,3 +36,18 @@ Content-Type: application/json
     }
   }
 }
+
+### Seating Cleaning in the Restaurant
+POST http://localhost:9194/api/v2/seating/cleaning
+Authorization: Basic user pwd
+Content-Type: application/json
+
+{
+  "since": 90000000000,
+  "seating": {
+    "id": 1,
+    "restaurant": {
+      "id": 1
+    }
+  }
+}

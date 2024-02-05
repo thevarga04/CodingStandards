@@ -11,7 +11,7 @@ public class SeatingCleaningServiceImpl implements SeatingCleaningService {
 
   @Override
   public SeatingCleaning seatingCleaningInRestaurant(SeatingCleaning seatingCleaning) {
-    return null;
+    return new SeatingCleaning(seatingCleaning.getSince(), seatingCleaning.getSeating());
   }
 
 }

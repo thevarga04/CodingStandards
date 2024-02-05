@@ -13,6 +13,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 import acme.taurant.openapi.v2.model.Restaurant;
 import acme.taurant.openapi.v2.model.Seating;
 import org.hibernate.QueryParameterException;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,6 +44,11 @@ class SponsorRestTest {
   @BeforeAll
   static void staticSetUp() {
     realmFactory = mockStatic(SponsorFactory.class);
+  }
+
+  @AfterAll
+  static void staticCloseUp() {
+    realmFactory.close();
   }
 
 

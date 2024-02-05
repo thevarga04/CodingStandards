@@ -9,10 +9,10 @@ import org.springframework.stereotype.Repository;
 public interface SeatingBookingRepo extends JpaRepository<JpaSeatingBooking, Integer> {
 
   /**
-   * In case of (semantically) complex queries it could be a better option to use JPQL query,
+   * In the case of (semantically) complex queries, it could be a better option to use JPQL query,
    * especially when a condition seems to be counter-intuitive and provide the explanation why.
    * <p>
-   * Get list of bookings which overlaps with the given parameters.
+   * Get a list of bookings which overlaps with the given parameters.
    */
   @Query("select b from JpaSeatingBooking b where"
     + " b.since < :until"
